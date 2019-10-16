@@ -1,29 +1,29 @@
 import React, { Fragment, useEffect } from 'react'
 import { useLocalStore, useObserver } from 'mobx-react-lite'
-import { todoService } from '../services/todoService'
-import AddTodo from '../components/Todo/AddTodo'
+import { notesService } from '../services/notesService'
+import AddTodo from '../components/Notes/AddNote'
 import Loader from '../components/Loader'
-import TodoList from '../components/Todo/TodoList'
+import NotesList from '../components/Notes/NotesList'
 
 export default function HomePage() {
-  const service = useLocalStore(() => todoService)
+  const service = useLocalStore(() => notesService)
 
   useEffect(() => {
-    service.getTodos()
+    service.getNotes()
   }, [])
 
   return useObserver(() => (
     <Fragment>
-      <AddTodo onCreate={service.addTodo} />
+      <AddTodo onCreate={service.addNote} />
       {service.loading && <Loader />}
-      {service.todos.length ? (
-        <TodoList
-          todos={service.todos}
-          onComplete={service.toggleTodo}
-          remove={service.removeTodo}
+      {service.notes.length ? (
+        <NotesList
+          notes={service.notes}
+          onComplete={service.toggleNote}
+          remove={service.removeNote}
         />
       ) : service.loading ? null : (
-        <p className="text-center">No todos!</p>
+        <p className="text-center">No notes!</p>
       )}
     </Fragment>
   ))

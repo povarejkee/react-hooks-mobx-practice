@@ -1,14 +1,14 @@
 import React from 'react'
-import TodoItem from './TodoItem'
+import NoteItem from './NoteItem'
 
-function TodoList(props) {
+export default function NotesList(props) {
   return (
     <ul className="list-group">
-      {props.todos.map(todo => {
+      {props.notes.map(note => {
         return (
-          <TodoItem
-            todo={todo}
-            key={todo.id}
+          <NoteItem
+            note={note}
+            key={note.id}
             onComplete={props.onComplete}
             remove={props.remove}
           />
@@ -17,5 +17,3 @@ function TodoList(props) {
     </ul>
   )
 }
-
-export default TodoList

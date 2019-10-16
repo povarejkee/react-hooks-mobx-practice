@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 
-function AddTodo({ onCreate }) {
+export default function AddNote({ onCreate }) {
   const [value, setValue] = useState('')
 
   function submitHandler(event) {
@@ -26,9 +25,3 @@ function AddTodo({ onCreate }) {
     </form>
   )
 }
-
-AddTodo.propTypes = {
-  onCreate: PropTypes.func.isRequired,
-}
-
-export default AddTodo

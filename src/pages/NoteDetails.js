@@ -1,31 +1,36 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useLocalStore, useObserver } from 'mobx-react-lite'
-import { todoService } from '../services/todoService'
+import { notesService } from '../services/notesService'
 import Loader from '../components/Loader'
 
 export default function NoteDetails({ noteId }) {
-  const service = useLocalStore(() => todoService)
+  const service = useLocalStore(() => notesService)
 
   useEffect(() => {
-    service.getTodo(noteId)
+    service.getNote(noteId).then(({ data }) => {
+      setTimeout(() => {
+        service.note = data
+        service.loading = false
+      }, 500)
+    })
   }, [])
 
   return useObserver(() =>
     service.loading ? (
       <Loader />
     ) : (
-      <Fragment>
-        <div>
-          Number: <strong>{noteId}</strong>
-        </div>
-        <div>
-          Title: <strong>{service.todo.title}</strong>
-        </div>
-        <div>
-          Status:{' '}
-          <strong>{service.todo.completed ? 'Complete' : 'Active'}</strong>
-        </div>
-      </Fragment>
+      <div className="card">
+        <div className="card-header">Information:</div>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">
+            Title: <strong>{service.note.title}</strong>
+          </li>
+          <li className="list-group-item">
+            Status:{' '}
+            <strong>{service.note.completed ? 'Complete' : 'Active'}</strong>
+          </li>
+        </ul>
+      </div>
     )
   )
 }

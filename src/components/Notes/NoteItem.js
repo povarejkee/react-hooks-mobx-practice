@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { navigate } from 'hookrouter'
 
-function TodoItem({ todo, onComplete, remove }) {
-  const [completed, toggleComplete] = useState(todo.completed)
+export default function NoteItem({ note, onComplete, remove }) {
+  const [completed, toggleComplete] = useState(note.completed)
   const classes = []
 
   if (completed) {
@@ -11,7 +11,7 @@ function TodoItem({ todo, onComplete, remove }) {
 
   const onChange = ({ target: { checked } }) => {
     toggleComplete(checked)
-    onComplete(todo, checked)
+    onComplete(note, checked)
   }
 
   return (
@@ -33,21 +33,28 @@ function TodoItem({ todo, onComplete, remove }) {
         >
           <input type="checkbox" checked={completed} onChange={onChange} />
           &nbsp;
-          {todo.title}
+          {note.title}
         </div>
         <div>
           <div className="btn-group" role="group" aria-label="Basic example">
             <button
               type="button"
               className="btn btn-outline-primary"
-              onClick={() => navigate(`home/notes/${todo.id}`)}
+              onClick={() => navigate(`home/notes/${note.id}`)}
             >
               More
             </button>
             <button
               type="button"
+              className="btn btn-outline-success"
+              onClick={() => navigate(`home/edit/${note.id}`)}
+            >
+              Edit
+            </button>
+            <button
+              type="button"
               className="btn btn-outline-danger"
-              onClick={() => remove(todo.id)}
+              onClick={() => remove(note.id)}
             >
               Remove
             </button>
@@ -57,5 +64,3 @@ function TodoItem({ todo, onComplete, remove }) {
     </li>
   )
 }
-
-export default TodoItem

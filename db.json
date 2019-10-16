@@ -1,24 +1,19 @@
 {
-  "todos": [
-    {
-      "title": "Съездить в военкомат",
-      "completed": true,
-      "id": 2
-    },
+  "notes": [
     {
       "title": "Разобраться в причине сбоя MobX",
-      "completed": true,
-      "id": 3
+      "id": 3,
+      "completed": true
     },
     {
       "title": "Перевести весь проект на MobX",
-      "completed": false,
+      "completed": true,
       "id": 4
     },
     {
-      "title": "Узнать, как пробрасывать состояние MobX, не используя useContext",
-      "completed": false,
-      "id": 5
+      "title": "Узнать, как пробрасывать состояние MobX, не используя useContext!",
+      "id": 5,
+      "completed": false
     }
   ]
 }
