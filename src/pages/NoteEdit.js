@@ -5,30 +5,33 @@ import Loader from '../components/Loader'
 
 export default function NoteEdit({ noteId }) {
   const service = useLocalStore(() => notesService)
-  const [value, setValue] = useState('')
+  const [title, setTitle] = useState('')
 
   useEffect(() => {
-    service.getNote(noteId).then(({ data }) => {
-      setTimeout(() => {
-        service.note = data //todo подумать как избавиться от этого. Всё должно быть однотипно и меняться только в сервисе, либо наоборот
-        service.loading = false
-        setValue(service.note.title)
-      }, 500)
+    service.getNote(noteId, ({ data }) => {
+      service.note = data
+      service.loading = false
+      setTitle(service.note.title)
     })
   }, [])
+
+  const onSubmit = event => {
+    event.preventDefault()
+    service.editNote({ ...service.note, title })
+  }
 
   return useObserver(() =>
     service.loading ? (
       <Loader />
     ) : (
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title</label>
           <input
             className="form-control"
             id="title"
-            value={value}
-            onChange={event => setValue(event.target.value)}
+            value={title}
+            onChange={event => setTitle(event.target.value)}
           />
         </div>
         <button type="submit" className="btn btn-primary">

@@ -1,9 +1,11 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useLocalStore, useObserver } from 'mobx-react-lite'
 import { notesService } from '../services/notesService'
-import AddTodo from '../components/Notes/AddNote'
+import { NotesContext } from '../context/NotesContext'
+import AddNote from '../components/Notes/AddNote'
 import Loader from '../components/Loader'
 import NotesList from '../components/Notes/NotesList'
+import NotesFilters from '../components/Notes/NotesFilters'
 
 export default function HomePage() {
   const service = useLocalStore(() => notesService)
@@ -13,18 +15,16 @@ export default function HomePage() {
   }, [])
 
   return useObserver(() => (
-    <Fragment>
-      <AddTodo onCreate={service.addNote} />
-      {service.loading && <Loader />}
-      {service.notes.length ? (
-        <NotesList
-          notes={service.notes}
-          onComplete={service.toggleNote}
-          remove={service.removeNote}
-        />
-      ) : service.loading ? null : (
-        <p className="text-center">No notes!</p>
-      )}
-    </Fragment>
+    <NotesContext.Provider
+      value={{
+        addNote: service.addNote,
+        removeNote: service.removeNote,
+        editNote: service.editNote,
+      }}
+    >
+      <AddNote />
+      {service.loading ? <Loader /> : <NotesList notes={service.notes} />}
+      <NotesFilters />
+    </NotesContext.Provider>
   ))
 }

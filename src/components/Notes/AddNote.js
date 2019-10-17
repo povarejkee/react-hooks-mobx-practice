@@ -1,23 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { NotesContext } from '../../context/NotesContext'
 
-export default function AddNote({ onCreate }) {
-  const [value, setValue] = useState('')
+export default function AddNote() {
+  const context = useContext(NotesContext)
+  const [title, setTitle] = useState('')
 
   function submitHandler(event) {
     event.preventDefault()
 
-    if (value.trim()) {
-      onCreate(value)
-      setValue('')
+    if (title.trim()) {
+      const newNote = { title, completed: false }
+
+      context.addNote(newNote)
+
+      setTitle('')
     }
   }
 
   return (
-    <form style={{ marginBottom: '1rem' }} onSubmit={submitHandler}>
+    <form onSubmit={submitHandler}>
       <div className="form-group">
         <input
-          value={value}
-          onChange={event => setValue(event.target.value)}
+          value={title}
+          onChange={event => setTitle(event.target.value)}
           className="form-control"
           placeholder="Add note..."
         />

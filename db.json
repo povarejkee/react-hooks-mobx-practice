@@ -6,14 +6,14 @@
       "completed": true
     },
     {
-      "title": "Перевести весь проект на MobX",
-      "completed": true,
-      "id": 4
+      "title": "test",
+      "completed": false,
+      "id": 6
     },
     {
-      "title": "Узнать, как пробрасывать состояние MobX, не используя useContext!",
-      "id": 5,
-      "completed": false
+      "title": "test1",
+      "completed": false,
+      "id": 7
     }
   ]
 }

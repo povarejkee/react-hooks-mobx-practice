@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { navigate } from 'hookrouter'
+import { NotesContext } from '../../context/NotesContext'
 
-export default function NoteItem({ note, onComplete, remove }) {
+export default function NoteItem({ note }) {
+  const context = useContext(NotesContext)
   const [completed, toggleComplete] = useState(note.completed)
   const classes = []
 
@@ -11,7 +13,7 @@ export default function NoteItem({ note, onComplete, remove }) {
 
   const onChange = ({ target: { checked } }) => {
     toggleComplete(checked)
-    onComplete(note, checked)
+    context.editNote({ ...note, completed: checked })
   }
 
   return (
@@ -54,7 +56,7 @@ export default function NoteItem({ note, onComplete, remove }) {
             <button
               type="button"
               className="btn btn-outline-danger"
-              onClick={() => remove(note.id)}
+              onClick={() => context.removeNote(note.id)}
             >
               Remove
             </button>

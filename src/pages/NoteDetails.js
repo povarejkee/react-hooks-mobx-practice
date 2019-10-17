@@ -7,11 +7,9 @@ export default function NoteDetails({ noteId }) {
   const service = useLocalStore(() => notesService)
 
   useEffect(() => {
-    service.getNote(noteId).then(({ data }) => {
-      setTimeout(() => {
-        service.note = data
-        service.loading = false
-      }, 500)
+    service.getNote(noteId, ({ data }) => {
+      service.note = { ...data }
+      service.loading = false
     })
   }, [])
 

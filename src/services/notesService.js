@@ -3,39 +3,39 @@ const URL = process.env.REACT_APP_API_URL
 
 export const notesService = {
   notes: [],
-  note: null,
-  loading: true,
+  note: {},
+  loading: false,
+  filter: 'all',
+
   getNotes() {
+    this.loading = true
     axios.get(`${URL}/notes`).then(({ data }) => {
-      setTimeout(() => {
-        this.notes = data
-        this.loading = false
-      }, 500)
+      this.notes = data
+      this.loading = false
     })
   },
 
-  getNote(id) {
-    return axios.get(`${URL}/notes/${id}`)
+  getNote(id, callback) {
+    //todo нужно избавиться от callback.
+    this.loading = true
+    axios.get(`${URL}/notes/${id}`).then(callback)
   },
 
-  addNote(title) {
-    const obj = {
-      title,
-      completed: false,
-    }
-    axios.post(`${URL}/notes/`, obj).then(({ data }) => {
-      this.notes = this.notes.concat([data])
-    })
-  },
-
-  toggleNote(note, completed) {
-    const updatedNote = { ...note, completed }
-    axios.put(`${URL}/notes/${note.id}`, updatedNote)
+  addNote(note) {
+    axios
+      .post(`${URL}/notes/`, note)
+      .then(({ data }) => (this.notes = this.notes.concat([data])))
   },
 
   removeNote(id) {
     axios.delete(`${URL}/notes/${id}`).then(() => {
       this.notes = this.notes.filter(note => note.id !== id)
     })
+  },
+
+  editNote(note) {
+    axios
+      .put(`${URL}/notes/${note.id}`, note)
+      .then(({ data }) => console.log(data))
   },
 }
