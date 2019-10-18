@@ -1,12 +1,14 @@
 import React from 'react'
-import HomePage from './pages/HomePage'
+import NotesPage from './pages/NotesPage'
 import InfoPage from './pages/InfoPage'
 import NoteDetails from './pages/NoteDetails'
 import NoteEdit from './pages/NoteEdit'
+import GoodsPage from './pages/GoodsPage'
 
 export const routes = {
-  '/home': () => <HomePage />,
-  '/home/notes/:id': ({ id }) => <NoteDetails noteId={id} />,
-  '/home/edit/:id': ({ id }) => <NoteEdit noteId={id} />,
+  '/': () => <NotesPage />,
+  '/notes/:id': ({ id }) => <NoteDetails noteId={id} />,
+  '/notes/edit/:id': ({ id }) => <NoteEdit noteId={id} />,
   '/info': () => <InfoPage />,
+  '/goods': () => <GoodsPage />,
 }

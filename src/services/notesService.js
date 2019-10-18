@@ -5,7 +5,6 @@ export const notesService = {
   notes: [],
   note: {},
   loading: false,
-  filter: 'all',
 
   getNotes() {
     this.loading = true
@@ -34,8 +33,9 @@ export const notesService = {
   },
 
   editNote(note) {
-    axios
-      .put(`${URL}/notes/${note.id}`, note)
-      .then(({ data }) => console.log(data))
+    axios.put(`${URL}/notes/${note.id}`, note).then(({ data }) => {
+      console.log(data)
+      this.getNotes() //хз, нормально ли так делать?
+    })
   },
 }

@@ -21,11 +21,12 @@ export default function NoteDetails({ noteId }) {
         <div className="card-header">Information:</div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
-            Title: <strong>{service.note.title}</strong>
+            <strong>Title: </strong>
+            {service.note.title}
           </li>
           <li className="list-group-item">
-            Status:{' '}
-            <strong>{service.note.completed ? 'Complete' : 'Active'}</strong>
+            <strong>Status: </strong>
+            {service.note.completed ? 'Complete' : 'Active'}
           </li>
         </ul>
       </div>

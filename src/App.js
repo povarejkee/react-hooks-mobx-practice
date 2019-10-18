@@ -1,17 +1,20 @@
 import React, { Fragment } from 'react'
-import { useRoutes, useRedirect } from 'hookrouter'
+import { useRoutes } from 'hookrouter'
 import { routes } from './routes'
 import Navbar from './components/Navbar'
-import NotFound from './pages/NotFound'
+import Alert from './components/Alert'
 
 function App() {
   const routeResult = useRoutes(routes)
-  useRedirect('/', '/home')
 
   return (
     <Fragment>
       <Navbar />
-      <div className="container pt-4">{routeResult || <NotFound />}</div>
+      <div className="container pt-4">
+        {routeResult || (
+          <Alert title="Error 404" text="Page no found!" type="danger" />
+        )}
+      </div>
     </Fragment>
   )
 }

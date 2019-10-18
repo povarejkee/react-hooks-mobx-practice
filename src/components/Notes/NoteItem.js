@@ -42,14 +42,14 @@ export default function NoteItem({ note }) {
             <button
               type="button"
               className="btn btn-outline-primary"
-              onClick={() => navigate(`home/notes/${note.id}`)}
+              onClick={() => navigate(`/notes/${note.id}`)}
             >
               More
             </button>
             <button
               type="button"
               className="btn btn-outline-success"
-              onClick={() => navigate(`home/edit/${note.id}`)}
+              onClick={() => navigate(`/notes/edit/${note.id}`)}
             >
               Edit
             </button>
