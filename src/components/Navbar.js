@@ -21,6 +21,11 @@ export default function Navbar() {
             Goods
           </A>
         </li>
+        <li className="nav-item">
+          <A href="/goods/basket" className="nav-link">
+            Basket
+          </A>
+        </li>
       </ul>
     </nav>
   )

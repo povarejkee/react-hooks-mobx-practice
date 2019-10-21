@@ -12,7 +12,7 @@ function App() {
       <Navbar />
       <div className="container pt-4">
         {routeResult || (
-          <Alert title="Error 404" text="Page no found!" type="danger" />
+          <Alert title="Error 404" text="Page not found!" type="danger" />
         )}
       </div>
     </Fragment>

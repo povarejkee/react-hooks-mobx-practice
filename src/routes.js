@@ -4,6 +4,7 @@ import InfoPage from './pages/InfoPage'
 import NoteDetails from './pages/NoteDetails'
 import NoteEdit from './pages/NoteEdit'
 import GoodsPage from './pages/GoodsPage'
+import BasketPage from './pages/BasketPage'
 
 export const routes = {
   '/': () => <NotesPage />,
@@ -11,4 +12,5 @@ export const routes = {
   '/notes/edit/:id': ({ id }) => <NoteEdit noteId={id} />,
   '/info': () => <InfoPage />,
   '/goods': () => <GoodsPage />,
+  '/goods/basket': () => <BasketPage />,
 }

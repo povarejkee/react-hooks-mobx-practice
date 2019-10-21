@@ -23,6 +23,20 @@
       "price": 50,
       "pic": null,
       "id": 1
+    },
+    {
+      "title": "Злые печеньки",
+      "author": "Волжский Пекарь",
+      "price": 25,
+      "pic": null,
+      "id": 2
+    },
+    {
+      "title": "Учим JavaScript",
+      "author": "Владилен Минин",
+      "price": 60,
+      "pic": null,
+      "id": 3
     }
   ]
 }
