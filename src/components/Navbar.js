@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { A } from 'hookrouter'
+import { GoodsContext } from '../context/GoodsContext'
 
 export default function Navbar() {
+  const context = useContext(GoodsContext)
+
   return (
     <nav className="navbar navbar-dark navbar-expand-lg bg-primary">
       <div className="navbar-brand">My Polygon</div>
@@ -23,7 +26,7 @@ export default function Navbar() {
         </li>
         <li className="nav-item">
           <A href="/goods/basket" className="nav-link">
-            Basket
+            Basket ({context.basketGoods.length})
           </A>
         </li>
       </ul>

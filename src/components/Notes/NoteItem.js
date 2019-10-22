@@ -5,7 +5,7 @@ import { NotesContext } from '../../context/NotesContext'
 export default function NoteItem({ note }) {
   const context = useContext(NotesContext)
   const [completed, toggleComplete] = useState(note.completed)
-  const classes = []
+  const classes = ['d-flex', 'justify-content-between', 'align-items-center']
 
   if (completed) {
     classes.push('done')
@@ -18,21 +18,8 @@ export default function NoteItem({ note }) {
 
   return (
     <li className="list-group-item">
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          className={classes.join(' ')}
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
+      <div className="d-flex justify-content-between align-items-center">
+        <div className={classes.join(' ')}>
           <input type="checkbox" checked={completed} onChange={onChange} />
           &nbsp;
           {note.title}

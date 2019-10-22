@@ -3,8 +3,8 @@ const URL = process.env.REACT_APP_API_URL
 
 export const goodsService = {
   goods: [],
-  basketGoods: localStorage.getItem('basket')
-    ? JSON.parse(localStorage.getItem('basket'))
+  basketGoods: sessionStorage.getItem('basket')
+    ? JSON.parse(sessionStorage.getItem('basket'))
     : [],
   loading: false,
 
@@ -17,7 +17,16 @@ export const goodsService = {
   },
 
   addToBasket(good) {
-    this.basketGoods.push(good)
-    localStorage.setItem('basket', JSON.stringify(this.basketGoods))
+    this.basketGoods = this.basketGoods.concat([good])
+    sessionStorage.setItem('basket', JSON.stringify(this.basketGoods))
+  },
+
+  removeFromBasket(index) {
+    this.basketGoods = this.basketGoods.filter((item, i) => i !== index)
+    sessionStorage.setItem('basket', JSON.stringify(this.basketGoods))
+  },
+
+  get totalSum() {
+    return this.basketGoods.reduce((total, { price }) => (total += price), 0)
   },
 }

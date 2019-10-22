@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { Fragment, useContext } from 'react'
 import BasketList from '../components/Basket/BasketList'
-import { useLocalStore } from 'mobx-react-lite'
-import { goodsService } from '../services/goodsService'
+import { GoodsContext } from '../context/GoodsContext'
 
 export default function BasketPage() {
-  const service = useLocalStore(() => goodsService)
+  const context = useContext(GoodsContext)
 
-  return <BasketList goods={service.basketGoods} />
+  return (
+    <Fragment>
+      <h3 className="text-center">Total: {context.totalSum}$</h3>
+      <BasketList />
+    </Fragment>
+  )
 }

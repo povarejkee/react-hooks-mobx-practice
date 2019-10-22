@@ -6,7 +6,7 @@ export default function GoodsItem({ item }) {
 
   return (
     <div className="card col-3">
-      <div className="card-body">
+      <div className="card-body d-flex flex-column">
         <h5 className="card-title">{item.title}</h5>
         <p className="card-text">
           <strong>Author: </strong>
@@ -17,10 +17,10 @@ export default function GoodsItem({ item }) {
           {item.price}$
         </p>
         <button
-          className="btn btn-primary"
+          className="btn btn-primary mt-auto"
           onClick={() => context.addToBasket(item)}
         >
-          Add
+          Add to basket
         </button>
       </div>
     </div>

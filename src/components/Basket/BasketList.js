@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import BasketItem from './BasketItem'
+import { GoodsContext } from '../../context/GoodsContext'
 
-export default function BasketList({ goods }) {
+export default function BasketList() {
+  const context = useContext(GoodsContext)
+
   return (
     <ul className="list-group">
-      {goods.map((item, i) => (
-        <BasketItem key={item.id} item={item} idx={i} />
-      ))}
+      {context.basketGoods.map((item, i) => {
+        return <BasketItem key={Math.random()} item={item} index={i} />
+      })}
     </ul>
   )
 }
