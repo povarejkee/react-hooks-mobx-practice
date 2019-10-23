@@ -18,6 +18,7 @@ function App() {
         basketGoods: service.basketGoods,
         getGoods: service.getGoods,
         addToBasket: service.addToBasket,
+        decrementGood: service.decrementGood,
         removeFromBasket: service.removeFromBasket,
         totalSum: service.totalSum,
         loading: service.loading,

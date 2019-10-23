@@ -16,8 +16,25 @@ export const goodsService = {
     })
   },
 
-  addToBasket(good) {
-    this.basketGoods = this.basketGoods.concat([good])
+  addToBasket(good, action = 'increment') {
+    const newBasketGood = { ...good, count: 1 }
+    const idList = this.basketGoods.map(item => item.id)
+
+    if (idList.includes(good.id)) {
+      const updatedBasketGoods = [...this.basketGoods]
+      const idx = this.basketGoods.findIndex(item => item.id === good.id)
+
+      if (action === 'decrement') {
+        updatedBasketGoods[idx].count--
+      } else {
+        updatedBasketGoods[idx].count++
+      }
+
+      this.basketGoods = [...updatedBasketGoods]
+    } else {
+      this.basketGoods = this.basketGoods.concat([newBasketGood])
+    }
+
     sessionStorage.setItem('basket', JSON.stringify(this.basketGoods))
   },
 
@@ -27,6 +44,9 @@ export const goodsService = {
   },
 
   get totalSum() {
-    return this.basketGoods.reduce((total, { price }) => (total += price), 0)
+    return this.basketGoods.reduce(
+      (total, { price, count }) => (total += price * count),
+      0
+    )
   },
 }
