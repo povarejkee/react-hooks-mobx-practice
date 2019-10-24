@@ -20,6 +20,7 @@ function App() {
         addToBasket: service.addToBasket,
         decrementGood: service.decrementGood,
         removeFromBasket: service.removeFromBasket,
+        clearBasket: service.clearBasket,
         totalSum: service.totalSum,
         loading: service.loading,
       }}

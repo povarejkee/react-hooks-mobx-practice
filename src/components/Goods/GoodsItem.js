@@ -1,8 +1,21 @@
 import React, { useContext } from 'react'
 import { GoodsContext } from '../../context/GoodsContext'
+import CountPanel from './CountPanel'
 
 export default function GoodsItem({ item }) {
   const context = useContext(GoodsContext)
+  const basketGood = context.basketGoods.find(({ id }) => id === item.id)
+  const renderActions = () =>
+    basketGood && basketGood.count > 0 ? (
+      <CountPanel item={item} counter={basketGood.count} />
+    ) : (
+      <button
+        className="btn btn-primary mt-auto"
+        onClick={() => context.addToBasket(item)}
+      >
+        Add to basket
+      </button>
+    )
 
   return (
     <div className="card col-3">
@@ -16,12 +29,7 @@ export default function GoodsItem({ item }) {
           <strong>Price: </strong>
           {item.price}$
         </p>
-        <button
-          className="btn btn-primary mt-auto"
-          onClick={() => context.addToBasket(item)}
-        >
-          Add to basket
-        </button>
+        {renderActions()}
       </div>
     </div>
   )

@@ -6,13 +6,18 @@
       "completed": true
     },
     {
-      "title": "test",
-      "completed": false,
-      "id": 6
+      "title": "Сделать страницу со списком товаров",
+      "completed": true,
+      "id": 4
     },
     {
-      "title": "test1",
-      "completed": false,
+      "title": "Реализовать корзину и её наполнение товарами",
+      "completed": true,
+      "id": 5
+    },
+    {
+      "title": "Доработать корзину по мелочам",
+      "completed": true,
       "id": 7
     }
   ],
@@ -34,6 +39,12 @@
       "author": "Владилен Минин",
       "price": 60,
       "id": 3
+    }
+  ],
+  "users": [
+    {
+      "email": "test@yandex.ru",
+      "password": "123456"
     }
   ]
 }

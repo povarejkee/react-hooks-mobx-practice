@@ -16,7 +16,7 @@ export const goodsService = {
     })
   },
 
-  addToBasket(good, action = 'increment') {
+  addToBasket(good, action) {
     const newBasketGood = { ...good, count: 1 }
     const idList = this.basketGoods.map(item => item.id)
 
@@ -24,10 +24,10 @@ export const goodsService = {
       const updatedBasketGoods = [...this.basketGoods]
       const idx = this.basketGoods.findIndex(item => item.id === good.id)
 
-      if (action === 'decrement') {
-        updatedBasketGoods[idx].count--
-      } else {
+      if (action === 'increment') {
         updatedBasketGoods[idx].count++
+      } else if (action === 'decrement') {
+        updatedBasketGoods[idx].count--
       }
 
       this.basketGoods = [...updatedBasketGoods]
@@ -38,8 +38,13 @@ export const goodsService = {
     sessionStorage.setItem('basket', JSON.stringify(this.basketGoods))
   },
 
-  removeFromBasket(index) {
-    this.basketGoods = this.basketGoods.filter((item, i) => i !== index)
+  removeFromBasket(id) {
+    this.basketGoods = this.basketGoods.filter(item => item.id !== id)
+    sessionStorage.setItem('basket', JSON.stringify(this.basketGoods))
+  },
+
+  clearBasket() {
+    this.basketGoods = []
     sessionStorage.setItem('basket', JSON.stringify(this.basketGoods))
   },
 

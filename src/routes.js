@@ -5,6 +5,8 @@ import NoteDetails from './pages/NoteDetails'
 import NoteEdit from './pages/NoteEdit'
 import GoodsPage from './pages/GoodsPage'
 import BasketPage from './pages/BasketPage'
+import LoginPage from './pages/LoginPage'
+import RegistrationPage from './pages/RegistrationPage'
 
 export const routes = {
   '/': () => <NotesPage />,
@@ -13,4 +15,6 @@ export const routes = {
   '/info': () => <InfoPage />,
   '/goods': () => <GoodsPage />,
   '/goods/basket': () => <BasketPage />,
+  '/login': () => <LoginPage />,
+  '/registration': () => <RegistrationPage />,
 }
