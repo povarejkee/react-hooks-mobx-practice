@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import useForm from 'react-hook-form'
-import { A } from 'hookrouter'
+import { navigate } from 'hookrouter'
+import axios from 'axios'
+import { AuthContext } from '../context/AuthContext'
+const URL = process.env.REACT_APP_API_URL
 const regExpEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 export default function LoginPage() {
-  const { register, handleSubmit, errors, reset } = useForm()
+  const { register, handleSubmit, errors, setError } = useForm()
+  const authContext = useContext(AuthContext)
+
   const onSubmit = values => {
-    console.log(values)
-    reset()
+    axios.get(`${URL}/users?email=${values.email}`).then(({ data }) => {
+      if (data[0] && values.email === data[0].email) {
+        if (values.password === data[0].password) {
+          alert('Success!')
+          authContext.logIn(values.email)
+          navigate(`${URL}`)
+        } else {
+          setError('password', 'notMatch')
+        }
+      } else {
+        setError('email', 'notMatch')
+      }
+    })
   }
 
   return (
@@ -18,7 +34,6 @@ export default function LoginPage() {
           type="text"
           className={`form-control ${errors.email && 'is-invalid'}`}
           id="email"
-          aria-describedby="emailHelp"
           placeholder="Enter email"
           ref={register({
             required: true,
@@ -30,6 +45,7 @@ export default function LoginPage() {
           <small className="text-danger">
             {errors.email.type === 'required' && 'This field is required!'}
             {errors.email.type === 'pattern' && 'Uncorrect email!'}
+            {errors.email.type === 'notMatch' && 'That email is not register!'}
           </small>
         )}
       </div>
@@ -52,15 +68,13 @@ export default function LoginPage() {
             {errors.password.type === 'required' && 'This field is required!'}
             {errors.password.type === 'minLength' && 'Min length is 6!'}
             {errors.password.type === 'maxLength' && 'Max length is 12!'}
+            {errors.password.type === 'notMatch' && 'Incorrect password!'}
           </small>
         )}
       </div>
       <button type="submit" className="btn btn-primary">
         Login
       </button>
-      <A href="/registration">
-        <button className="btn btn-primary ml-2">Registration</button>
-      </A>
     </form>
   )
 }

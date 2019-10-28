@@ -19,6 +19,21 @@
       "title": "Доработать корзину по мелочам",
       "completed": true,
       "id": 7
+    },
+    {
+      "title": "Сделать авторизацию на json-server",
+      "completed": true,
+      "id": 8
+    },
+    {
+      "title": "Сделать регистрацию на json-server",
+      "completed": true,
+      "id": 9
+    },
+    {
+      "title": "Сделать логику редиректов и прочего при входе/выходе",
+      "completed": false,
+      "id": 10
     }
   ],
   "goods": [
@@ -44,7 +59,13 @@
   "users": [
     {
       "email": "test@yandex.ru",
-      "password": "123456"
+      "password": "123456",
+      "id": 1
+    },
+    {
+      "email": "povarejkee@yandex.ru",
+      "password": "123456",
+      "id": 2
     }
   ]
 }
