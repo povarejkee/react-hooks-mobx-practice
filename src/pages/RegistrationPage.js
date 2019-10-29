@@ -16,6 +16,7 @@ export default function RegistrationPage() {
 
     if (getValues().confirmation !== user.password) {
       setError('confirmation', 'notMatch')
+      return
     }
 
     axios.get(`${URL}/users?email=${user.email}`).then(({ data }) => {

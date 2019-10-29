@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { GoodsContext } from '../../context/GoodsContext'
 import CountPanel from './CountPanel'
+import { GlobalContext } from '../../context/GlobalContext'
 
 export default function GoodsItem({ item }) {
-  const context = useContext(GoodsContext)
+  const context = useContext(GlobalContext)
   const basketGood = context.basketGoods.find(({ id }) => id === item.id)
   const renderActions = () =>
     basketGood && basketGood.count > 0 ? (

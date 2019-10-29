@@ -32,7 +32,7 @@
     },
     {
       "title": "Сделать логику редиректов и прочего при входе/выходе",
-      "completed": false,
+      "completed": true,
       "id": 10
     }
   ],
@@ -66,6 +66,16 @@
       "email": "povarejkee@yandex.ru",
       "password": "123456",
       "id": 2
+    },
+    {
+      "email": "dadada@test.ru",
+      "password": "123456",
+      "id": 3
+    },
+    {
+      "email": "povarejkee@yandex.com",
+      "password": "123456",
+      "id": 4
     }
   ]
 }

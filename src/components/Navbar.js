@@ -1,14 +1,12 @@
 import React, { Fragment, useContext } from 'react'
 import { A, navigate } from 'hookrouter'
-import { GoodsContext } from '../context/GoodsContext'
-import { AuthContext } from '../context/AuthContext'
+import { GlobalContext } from '../context/GlobalContext'
 
 export default function Navbar() {
-  const goodsContext = useContext(GoodsContext)
-  const authContext = useContext(AuthContext)
+  const context = useContext(GlobalContext)
 
   const logOut = () => {
-    authContext.logOut()
+    context.logOut()
     navigate('/login')
   }
 
@@ -16,7 +14,7 @@ export default function Navbar() {
     <nav className="navbar navbar-dark navbar-expand-lg bg-primary">
       <div className="navbar-brand">My Polygon</div>
       <ul className="navbar-nav ml-auto">
-        {authContext.isAuth ? (
+        {context.isAuth ? (
           <Fragment>
             <li className="nav-item">
               <A href="/" className="nav-link">
@@ -35,7 +33,7 @@ export default function Navbar() {
             </li>
             <li className="nav-item">
               <A href="/goods/basket" className="nav-link">
-                Basket ({goodsContext.basketGoods.length})
+                Basket ({context.basketGoods.length})
               </A>
             </li>
             <li

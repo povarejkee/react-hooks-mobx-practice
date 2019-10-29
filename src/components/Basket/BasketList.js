@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import BasketItem from './BasketItem'
-import { GoodsContext } from '../../context/GoodsContext'
+import { GlobalContext } from '../../context/GlobalContext'
 
 export default function BasketList() {
-  const context = useContext(GoodsContext)
+  const context = useContext(GlobalContext)
 
   return (
     <ul className="list-group">

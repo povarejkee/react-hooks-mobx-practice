@@ -1,9 +1,9 @@
 import React, { Fragment, useContext } from 'react'
 import BasketList from '../components/Basket/BasketList'
-import { GoodsContext } from '../context/GoodsContext'
+import { GlobalContext } from '../context/GlobalContext'
 
 export default function BasketPage() {
-  const context = useContext(GoodsContext)
+  const context = useContext(GlobalContext)
   const renderBasketList = () =>
     context.basketGoods.length ? (
       <Fragment>

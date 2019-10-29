@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react'
 import GoodsList from '../components/Goods/GoodsList'
 import Loader from '../components/Loader'
-import { GoodsContext } from '../context/GoodsContext'
+import { GlobalContext } from '../context/GlobalContext'
 
 export default function GoodsPage() {
-  const context = useContext(GoodsContext)
+  const context = useContext(GlobalContext)
 
   useEffect(() => {
     context.getGoods()

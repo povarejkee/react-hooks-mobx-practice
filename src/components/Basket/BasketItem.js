@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { GoodsContext } from '../../context/GoodsContext'
 import CountPanel from '../Goods/CountPanel'
+import { GlobalContext } from '../../context/GlobalContext'
 
 export default function BasketItem({ item }) {
-  const context = useContext(GoodsContext)
+  const context = useContext(GlobalContext)
 
   return (
     <li className="list-group-item">

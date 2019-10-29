@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import GoodsItem from './GoodsItem'
-import { GoodsContext } from '../../context/GoodsContext'
+import { GlobalContext } from '../../context/GlobalContext'
 
 export default function GoodsList() {
-  const context = useContext(GoodsContext)
+  const context = useContext(GlobalContext)
 
   return (
     <div className="row justify-content-between">
