@@ -7,8 +7,8 @@ export default function BasketList() {
 
   return (
     <ul className="list-group">
-      {context.basketGoods.map(item => {
-        return <BasketItem key={item.id} item={item} />
+      {context.basketGoods.map((item, i) => {
+        return <BasketItem key={item.id} item={item} index={i} />
       })}
     </ul>
   )

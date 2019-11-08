@@ -2,13 +2,13 @@ import React, { useContext } from 'react'
 import CountPanel from '../Goods/CountPanel'
 import { GlobalContext } from '../../context/GlobalContext'
 
-export default function BasketItem({ item }) {
+export default function BasketItem({ item, index }) {
   const context = useContext(GlobalContext)
 
   return (
     <li className="list-group-item">
       <div className="d-flex align-items-center">
-        <div>{`${item.id}. ${item.title} (${item.price * item.count}$)`}</div>
+        <div>{`${index + 1}. ${item.title} (${item.price * item.count}$)`}</div>
         <div className="d-flex align-items-center ml-auto">
           <CountPanel item={item} counter={item.count} />
           <button

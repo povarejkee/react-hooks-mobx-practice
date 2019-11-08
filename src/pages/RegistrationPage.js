@@ -36,7 +36,7 @@ export default function RegistrationPage() {
       <div className="form-group">
         <label htmlFor="email">Email address</label>
         <input
-          type="email"
+          type="text"
           className={`form-control ${errors.email && 'is-invalid'}`}
           id="email"
           aria-describedby="emailHelp"

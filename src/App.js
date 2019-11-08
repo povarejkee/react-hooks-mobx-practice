@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useRoutes } from 'hookrouter'
-import { isAuthRoutes, notAuthRoutes } from './routes'
+import { routes } from './routes'
 import { useLocalStore, useObserver } from 'mobx-react-lite'
 import { goodsService } from './services/goodsService'
 import { GlobalContext } from './context/GlobalContext'
@@ -9,46 +9,38 @@ import Navbar from './components/Navbar'
 import Alert from './components/Alert'
 
 export default function App() {
-  const service = useLocalStore(() => goodsService)
-  const auth = useLocalStore(() => authService)
+  const service = {
+    goods: useLocalStore(() => goodsService),
+    auth: useLocalStore(() => authService),
+  }
 
-  const routeIsAuthResult = useRoutes(isAuthRoutes)
-  const routeNotAuthResult = useRoutes(notAuthRoutes)
+  const routeResult = useRoutes(routes)
 
   useEffect(() => {
     if (localStorage.getItem('userId')) {
-      auth.isAuth = true
+      service.auth.isAuth = true
     }
   }, [])
-
-  const routeRenders = () => {
-    if (auth.isAuth) {
-      return routeIsAuthResult
-    } else {
-      return routeNotAuthResult
-    }
-  }
 
   return useObserver(() => (
     <GlobalContext.Provider
       value={{
-        goods: service.goods,
-        basketGoods: service.basketGoods,
-        getGoods: service.getGoods,
-        addToBasket: service.addToBasket,
-        decrementGood: service.decrementGood,
-        removeFromBasket: service.removeFromBasket,
-        clearBasket: service.clearBasket,
-        totalSum: service.totalSum,
-        loading: service.loading,
-        isAuth: auth.isAuth,
-        logIn: auth.logIn,
-        logOut: auth.logOut,
+        goods: service.goods.goods,
+        basketGoods: service.goods.basketGoods,
+        getGoods: service.goods.getGoods,
+        addToBasket: service.goods.addToBasket,
+        removeFromBasket: service.goods.removeFromBasket,
+        clearBasket: service.goods.clearBasket,
+        totalSum: service.goods.totalSum,
+        loading: service.goods.loading,
+        isAuth: service.auth.isAuth,
+        logIn: service.auth.logIn,
+        logOut: service.auth.logOut,
       }}
     >
       <Navbar />
       <div className="container pt-4">
-        {routeRenders() || (
+        {routeResult || (
           <Alert title="Error 404" text="Page not found!" type="danger" />
         )}
       </div>

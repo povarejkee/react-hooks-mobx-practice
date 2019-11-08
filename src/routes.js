@@ -8,16 +8,13 @@ import BasketPage from './pages/BasketPage'
 import LoginPage from './pages/LoginPage'
 import RegistrationPage from './pages/RegistrationPage'
 
-export const isAuthRoutes = {
+export const routes = {
   '/': () => <NotesPage />,
   '/notes/:id': ({ id }) => <NoteDetails noteId={id} />,
   '/notes/edit/:id': ({ id }) => <NoteEdit noteId={id} />,
   '/info': () => <InfoPage />,
   '/goods': () => <GoodsPage />,
   '/goods/basket': () => <BasketPage />,
-}
-
-export const notAuthRoutes = {
   '/login': () => <LoginPage />,
   '/registration': () => <RegistrationPage />,
 }
