@@ -1,13 +1,15 @@
 import React, { useContext } from 'react'
 import useForm from 'react-hook-form'
-import { navigate } from 'hookrouter'
 import axios from 'axios'
 import { GlobalContext } from '../context/GlobalContext'
+import { useHistory } from 'react-router-dom'
+
 const URL = process.env.REACT_APP_API_URL
 const regExpEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 export default function LoginPage() {
   const { register, handleSubmit, errors, setError } = useForm()
+  const history = useHistory()
   const context = useContext(GlobalContext)
 
   const onSubmit = values => {
@@ -16,7 +18,7 @@ export default function LoginPage() {
         if (values.password === data[0].password) {
           alert('Success!')
           context.logIn(values.email)
-          navigate(`${URL}`)
+          history.push('/')
         } else {
           setError('password', 'notMatch')
         }

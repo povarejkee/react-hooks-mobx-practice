@@ -1,13 +1,14 @@
 import React, { Fragment, useContext } from 'react'
-import { A, navigate } from 'hookrouter'
 import { GlobalContext } from '../context/GlobalContext'
+import { NavLink, useHistory } from 'react-router-dom'
 
 export default function Navbar() {
   const context = useContext(GlobalContext)
+  const history = useHistory()
 
   const logOut = () => {
     context.logOut()
-    navigate('/login')
+    history.push('/login')
   }
 
   return (
@@ -17,24 +18,24 @@ export default function Navbar() {
         {context.isAuth ? (
           <Fragment>
             <li className="nav-item">
-              <A href="/" className="nav-link">
+              <NavLink to="/notes" className="nav-link">
                 Notes
-              </A>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <A href="/info" className="nav-link">
+              <NavLink to="/info" className="nav-link">
                 Info
-              </A>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <A href="/goods" className="nav-link">
+              <NavLink to="/goods" className="nav-link">
                 Goods
-              </A>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <A href="/goods/basket" className="nav-link">
+              <NavLink to="/basket" className="nav-link">
                 Basket ({context.basketGoods.length})
-              </A>
+              </NavLink>
             </li>
             <li
               className="nav-link"
@@ -47,14 +48,14 @@ export default function Navbar() {
         ) : (
           <Fragment>
             <li className="nav-item">
-              <A href="/login" className="nav-link">
+              <NavLink to="/login" className="nav-link">
                 Login
-              </A>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <A href="/registration" className="nav-link">
+              <NavLink to="/registration" className="nav-link">
                 Registration
-              </A>
+              </NavLink>
             </li>
           </Fragment>
         )}

@@ -1,12 +1,14 @@
 import React from 'react'
 import useForm from 'react-hook-form'
 import axios from 'axios'
-import { navigate } from 'hookrouter'
+import { useHistory } from 'react-router-dom'
+
 const URL = process.env.REACT_APP_API_URL
 const regExpEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 export default function RegistrationPage() {
   const { register, handleSubmit, errors, setError, getValues } = useForm()
+  const history = useHistory()
 
   const onSubmit = values => {
     const user = {
@@ -25,7 +27,7 @@ export default function RegistrationPage() {
       } else {
         axios.post(`${URL}/users`, user).then(() => {
           alert('Registry is successfully!')
-          navigate('/login')
+          history.push('/login')
         })
       }
     })

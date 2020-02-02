@@ -2,12 +2,14 @@ import React, { useEffect } from 'react'
 import { useLocalStore, useObserver } from 'mobx-react-lite'
 import { notesService } from '../services/notesService'
 import Loader from '../components/Loader'
+import { useParams } from 'react-router-dom'
 
-export default function NoteDetails({ noteId }) {
+export default function NoteDetails() {
   const service = useLocalStore(() => notesService)
+  const { id } = useParams()
 
   useEffect(() => {
-    service.getNote(noteId, ({ data }) => {
+    service.getNote(id, ({ data }) => {
       service.note = { ...data }
       service.loading = false
     })
