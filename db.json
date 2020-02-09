@@ -58,24 +58,9 @@
   ],
   "users": [
     {
-      "email": "test@yandex.ru",
-      "password": "123456",
-      "id": 1
-    },
-    {
-      "email": "povarejkee@yandex.ru",
-      "password": "123456",
-      "id": 2
-    },
-    {
-      "email": "dadada@test.ru",
-      "password": "123456",
-      "id": 3
-    },
-    {
       "email": "test@test.ru",
       "password": "123456",
-      "id": 4
+      "id": 1
     }
   ]
 }
