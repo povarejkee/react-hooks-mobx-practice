@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useLocalStore, useObserver } from 'mobx-react-lite'
 import { goodsService } from './services/goodsService'
 import { GlobalContext } from './context/GlobalContext'
@@ -19,6 +19,32 @@ import NoteEdit from './pages/NoteEdit'
 import InfoPage from './pages/InfoPage'
 import GoodsPage from './pages/GoodsPage'
 import BasketPage from './pages/BasketPage'
+
+const PrivateRouteIsAuth = ({ component: Component, ...rest }) => {
+  const { isAuth } = useContext(GlobalContext)
+
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        isAuth ? <Component {...props} /> : <Redirect to="/login" />
+      }
+    />
+  )
+}
+
+const PrivateRouteIsNotAuth = ({ component: Component, ...rest }) => {
+  const { isAuth } = useContext(GlobalContext)
+
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        !isAuth ? <Component {...props} /> : <Redirect to="/" />
+      }
+    />
+  )
+}
 
 export default function App() {
   const service = {
@@ -51,43 +77,39 @@ export default function App() {
       <Router>
         <Navbar />
         <div className="container pt-4">
-          {!service.auth.isAuth ? (
-            <Switch>
-              <Redirect from="*" to="/login" />
-              {/* Почему этот редирект срабатывает в обоих условиях? */}
-              <Route path="/login">
-                <LoginPage />
-              </Route>
-              <Route path="/registration">
-                <RegistrationPage />
-              </Route>
-            </Switch>
-          ) : (
-            <Switch>
-              <Redirect exact from="/" to="/info" /> {/* Игнорируется */}
-              <Route path="/notes" exact>
-                <NotesPage />
-              </Route>
-              <Route path="/notes/:id" exact>
-                <NoteDetails />
-              </Route>
-              <Route path="/notes/edit/:id">
-                <NoteEdit />
-              </Route>
-              <Route path="/info">
-                <InfoPage />
-              </Route>
-              <Route path="/goods">
-                <GoodsPage />
-              </Route>
-              <Route path="/basket">
-                <BasketPage />
-              </Route>
-              <Route>
-                <Alert title="Error 404" text="Page not found!" type="danger" />
-              </Route>
-            </Switch>
-          )}
+          <Switch>
+            {/** Не авторизован */}
+            <PrivateRouteIsNotAuth path="/login" component={LoginPage} />
+            <PrivateRouteIsNotAuth
+              path="/registration"
+              component={RegistrationPage}
+            />
+
+            {/** Авторизован */}
+            <PrivateRouteIsAuth
+              exact
+              path={['/', '/info']}
+              component={InfoPage}
+            />
+            <PrivateRouteIsAuth exact path="/notes" component={NotesPage} />
+            <PrivateRouteIsAuth
+              exact
+              path="/notes/:id"
+              component={NoteDetails}
+            />
+            <PrivateRouteIsAuth
+              exact
+              path="/notes/edit/:id"
+              component={NoteEdit}
+            />
+            <PrivateRouteIsAuth path="/goods" component={GoodsPage} />
+            <PrivateRouteIsAuth path="/basket" component={BasketPage} />
+
+            {/** Страница не найдена */}
+            <Route>
+              <Alert title="Error 404" text="Page not found!" type="danger" />
+            </Route>
+          </Switch>
         </div>
       </Router>
     </GlobalContext.Provider>
